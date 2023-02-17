@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f4d005a-4e7c-45e8-bbca-57aa21df04c6" name="Changes" comment="Sorting and logic">
-      <change beforePath="$PROJECT_DIR$/src/SortingHandler/SortHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SortingHandler/SortHandler.java" afterDir="false" />
+    <list default="true" id="8f4d005a-4e7c-45e8-bbca-57aa21df04c6" name="Changes" comment="Added QuickSort, added null-checking for files">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,18 +31,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Assets" />
@@ -66,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1676572181350</updated>
       <workItem from="1676572182452" duration="4836000" />
+      <workItem from="1676661659066" duration="8282000" />
     </task>
     <task id="LOCAL-00001" summary="Adds source files from project description">
       <created>1676572394860</created>
@@ -95,18 +96,44 @@
       <option name="project" value="LOCAL" />
       <updated>1676595544952</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added QuickSort, added null-checking for files">
+      <created>1676676934447</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676676934447</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added QuickSort, added null-checking for files">
+      <created>1676677124990</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676677124990</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adds source files from project description" />
     <MESSAGE value="File handling" />
     <MESSAGE value="Refactor to package" />
     <MESSAGE value="Sorting and logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sorting and logic" />
+    <MESSAGE value="Added QuickSort, added null-checking for files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added QuickSort, added null-checking for files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
