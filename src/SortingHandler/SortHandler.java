@@ -77,7 +77,7 @@ public class SortHandler {
                         return;
                 }
                 if (isSorted(list)) {
-                    fc.fileHandler.writeToFile(list, file.getPath() + "_sorted_algorithm");
+                    fc.fileHandler.writeToFile(list, file.getPath() + "_sorted_" + algorithm);
                     System.out.println("FileManager " + file.getPath() + " sorted with " + inversions + " inversions");
                 } else {
                     System.out.println("FileManager " + file.getPath() + " is not sorted");
