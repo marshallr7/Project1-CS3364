@@ -45,6 +45,34 @@ public class SortHandler {
         }
     }
 
+    public void quickSort(List<Integer> list,int low,int high) {
+        if (low < high) {
+            int pivotIndex = partition(list, low, high); // start by calling the partition function
+            quickSort(list, low, pivotIndex - 1); // quickSort numbers lower than pivot
+            quickSort(list, pivotIndex + 1, high); // quickSort numbers higher than pivot
+        }
+    }
+
+    private int partition(List<Integer> list, int low, int high) {
+        Integer pivot = list.get(low); // set pivot to first value in list
+        int j = high;
+        for (int i = high; i > low; i--) {
+            if (list.get(i) > pivot) { // if the current value is greater than the pivot value
+                swap(list,i,j--); // swap the values
+                inversions++; // increment inversions
+            }
+        }
+        swap(list,low,j); // swap initial pivot value into its correct position
+        inversions++; // increment inversions
+        return j; // return location of pivot value
+    }
+
+    private void swap(List<Integer> list, int i, int j) {
+        Integer temp = list.get(i);
+        list.set(i,list.get(j));
+        list.set(j,temp);
+    }
+
     public int getInversions() {
         return inversions;
     }
@@ -66,21 +94,26 @@ public class SortHandler {
         assert files != null;
         for (File file : files) {
             if (file.isFile()) {
-                List<Integer> list = fc.cache.get(file.getPath());
-                switch (algorithm) {
-                    case "mergeSort":
-                        mergeSort(list);
-                        break;
-                    // add cases for other sorting algorithms here
-                    default:
-                        System.out.println("Invalid sorting algorithm specified");
-                        return;
-                }
-                if (isSorted(list)) {
-                    fc.fileHandler.writeToFile(list, file.getPath() + "_sorted_" + algorithm);
-                    System.out.println("FileManager " + file.getPath() + " sorted with " + inversions + " inversions");
-                } else {
-                    System.out.println("FileManager " + file.getPath() + " is not sorted");
+                List<Integer> list = fc.cache.get("assets/source5.txt");
+                if (list != null) {
+                    switch (algorithm) {
+                        case "mergeSort":
+                            mergeSort(list);
+                            break;
+                        // add cases for other sorting algorithms here
+                        case "quickSort":
+                            quickSort(list, 0, list.size() - 1);
+                            break;
+                        default:
+                            System.out.println("Invalid sorting algorithm specified");
+                            return;
+                    }
+                    if (isSorted(list)) {
+                        fc.fileHandler.writeToFile(list, file.getPath() + "_sorted_" + algorithm);
+                        System.out.println("FileManager " + file.getPath() + " sorted with " + inversions + " inversions");
+                    } else {
+                        System.out.println("FileManager " + file.getPath() + " is not sorted");
+                    }
                 }
                 inversions = 0; // reset inversions count
             }

@@ -7,6 +7,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         SortHandler sh = new SortHandler();
 
-        sh.sortAllFiles("mergeSort");
+        sh.sortAllFiles("quickSort");
     }
 }
