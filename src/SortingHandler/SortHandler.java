@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SortHandler {
-    private int inversions = 0;
+    private final FileCache fc;
+    private int inversions;
+
+    public SortHandler() {
+        this.fc = new FileCache();
+        this.inversions = 0;
+    }
 
     public void mergeSort(List<Integer> list) {
         if (list.size() < 2) {
@@ -119,5 +125,67 @@ public class SortHandler {
             }
         }
     }
+    public List<Integer> sumValuesByIndex(List<String> fileNames) throws IOException {
+        List<List<Integer>> lists = new ArrayList<>();
+        for (String fileName : fileNames) {
+            List<Integer> list = fc.loadFromFile(fileName);
+            if (list != null) {
+                lists.add(list);
+            }
+        }
+        List<Integer> result = new ArrayList<>();
+        int maxLength = lists.stream().mapToInt(List::size).max().orElse(0);
+        for (int i = 0; i < maxLength; i++) {
+            int sum = 0;
+            for (List<Integer> list : lists) {
+                if (i < list.size()) {
+                    sum += list.get(i);
+                }
+            }
+            result.add(sum);
+        }
+        return result;
+    }
+
+    public void mergeSortWithPositions(List<Integer> list, List<Integer> positions) {
+        int n = list.size();
+        if (n < 2) {
+            return;
+        }
+        int mid = n / 2;
+        List<Integer> left = new ArrayList<>(list.subList(0, mid));
+        List<Integer> right = new ArrayList<>(list.subList(mid, n));
+        List<Integer> leftPositions = new ArrayList<>(positions.subList(0, mid));
+        List<Integer> rightPositions = new ArrayList<>(positions.subList(mid, n));
+        mergeSortWithPositions(left, leftPositions);
+        mergeSortWithPositions(right, rightPositions);
+        int i = 0, j = 0, k = 0;
+        while (i < left.size() && j < right.size()) {
+            if (left.get(i) <= right.get(j)) {
+                list.set(k, left.get(i));
+                positions.set(k, leftPositions.get(i));
+                i++;
+            } else {
+                list.set(k, right.get(j));
+                positions.set(k, rightPositions.get(j));
+                j++;
+            }
+            k++;
+        }
+        while (i < left.size()) {
+            list.set(k, left.get(i));
+            positions.set(k, leftPositions.get(i));
+            i++;
+            k++;
+        }
+        while (j < right.size()) {
+            list.set(k, right.get(j));
+            positions.set(k, rightPositions.get(j));
+            j++;
+            k++;
+        }
+    }
+
+
 }
 
