@@ -96,12 +96,10 @@ public class NewSortingHandler {
             if (list.get(i) > pivot) { // if the current value is greater than the pivot value
                 swap(list,i,j); // swap the values
                 swap(positions,i,j--);
-                //inversions++; // increment inversions
             }
         }
         swap(list,low,j); // swap initial pivot value into its correct position
         swap(positions,low,j);
-        //inversions++; // increment inversions
         return j; // return location of pivot value
     }
 
@@ -109,6 +107,28 @@ public class NewSortingHandler {
         Integer temp = list.get(i);
         list.set(i,list.get(j));
         list.set(j,temp);
+    }
+
+    public void quickSortWithInversions(List<Integer> list,int low,int high) {
+        if (low < high) {
+            int pivotIndex = partitionWithInversions(list, low, high); // start by calling the partition function
+            quickSortWithInversions(list, low, pivotIndex - 1); // quickSort numbers lower than pivot
+            quickSortWithInversions(list, pivotIndex + 1, high); // quickSort numbers higher than pivot
+        }
+    }
+
+    private int partitionWithInversions(List<Integer> list, int low, int high) {
+        Integer pivot = list.get(low); // set pivot to first value in list
+        int j = high;
+        for (int i = high; i > low; i--) {
+            if (list.get(i) > pivot) { // if the current value is greater than the pivot value
+                swap(list,i,j--); // swap the values
+                inversions++; // increment inversions
+            }
+        }
+        swap(list,low,j); // swap initial pivot value into its correct position
+        inversions++; // increment inversions
+        return j; // return location of pivot value
     }
 
     public void sortAllFilesWithPositions(String sortingAlgorithm, List<Integer> sumList) throws IOException {
@@ -149,6 +169,8 @@ public class NewSortingHandler {
         // Save the sorted sum list
         String sumFileName = String.format("%s_Sorted_Sum.txt", sortingAlgorithm);
         this.fh.writeToFile(sumList, sumFileName);
+        // Need: re-sort contents of each newly-sorted file and count inversions
+        // Compare (in report)
     }
 
 
