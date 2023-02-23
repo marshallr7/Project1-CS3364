@@ -1,5 +1,4 @@
 import SortingHandler.NewSortingHandler;
-import SortingHandler.SortHandler;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -7,7 +6,6 @@ import java.util.List;
 
 public class Main {
 
-    private static final SortHandler sh = new SortHandler();
     private static final NewSortingHandler nsh = new NewSortingHandler();
 
     public static void main(String[] args) throws IOException {
