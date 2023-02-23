@@ -19,31 +19,6 @@ public class FileHandler {
     }
 
 
-    public void printFileContents(String fileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
-        reader.close();
-    }
-
-    public boolean isFileSorted(String fileName) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
-        int previousValue = Integer.MIN_VALUE; // set initial value to the smallest integer
-        String line;
-        while ((line = reader.readLine()) != null) {
-            int value = Integer.parseInt(line);
-            if (value < previousValue) {
-                reader.close();
-                return false;
-            }
-            previousValue = value;
-        }
-        reader.close();
-        return true;
-    }
-
     public void writeToFile(List<Integer> list, String fileName) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
         for (Integer integer : list) {
