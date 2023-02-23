@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f4d005a-4e7c-45e8-bbca-57aa21df04c6" name="Changes" comment="Quick Sort with Inversions" />
+    <list default="true" id="8f4d005a-4e7c-45e8-bbca-57aa21df04c6" name="Changes" comment="new changes because prof changed what he wanted :^)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SortingHandler/NewSortingHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SortingHandler/NewSortingHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

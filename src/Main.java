@@ -20,6 +20,7 @@ public class Main {
         );
         List<Integer> sums = nsh.sumValuesByIndex(fileNames);
         System.out.println(sums);
+        nsh.sortAllFilesWithPositions("merge", sums);
         nsh.sortAllFilesWithPositions("quick", sums);
 
     }

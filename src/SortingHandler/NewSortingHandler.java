@@ -6,6 +6,7 @@ import FileManager.FileHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class NewSortingHandler {
@@ -42,19 +43,20 @@ public class NewSortingHandler {
         return result;
     }
 
-    public void mergeSortWithPositions(List<Integer> list, List<Integer> positions) {
+    public int mergeSortWithPositions(List<Integer> list, List<Integer> positions, List<Integer> inversions) {
         int n = list.size();
         if (n < 2) {
-            return;
+            return 0;
         }
         int mid = n / 2;
         List<Integer> left = new ArrayList<>(list.subList(0, mid));
         List<Integer> right = new ArrayList<>(list.subList(mid, n));
         List<Integer> leftPositions = new ArrayList<>(positions.subList(0, mid));
         List<Integer> rightPositions = new ArrayList<>(positions.subList(mid, n));
-        mergeSortWithPositions(left, leftPositions);
-        mergeSortWithPositions(right, rightPositions);
+        int leftInversions = mergeSortWithPositions(left, leftPositions, inversions);
+        int rightInversions = mergeSortWithPositions(right, rightPositions, inversions);
         int i = 0, j = 0, k = 0;
+        int inversionsCount = leftInversions + rightInversions;
         while (i < left.size() && j < right.size()) {
             if (left.get(i) <= right.get(j)) {
                 list.set(k, left.get(i));
@@ -64,6 +66,9 @@ public class NewSortingHandler {
                 list.set(k, right.get(j));
                 positions.set(k, rightPositions.get(j));
                 j++;
+                int invCount = mid - i;
+                inversionsCount += invCount;
+                inversions.set(k, inversions.get(k) + invCount);
             }
             k++;
         }
@@ -79,7 +84,9 @@ public class NewSortingHandler {
             j++;
             k++;
         }
+        return inversionsCount;
     }
+
 
     public void quickSortWithPositions(List<Integer> list,List<Integer> positions,int low,int high) {
         if (low < high) {
@@ -147,7 +154,9 @@ public class NewSortingHandler {
             positions.add(i);
         }
         if (sortingAlgorithm.equalsIgnoreCase("merge")) {
-            mergeSortWithPositions(sumList, positions);
+            List<Integer> inversions = new ArrayList<>(Collections.nCopies(sumList.size(), 0));
+            int inv = mergeSortWithPositions(sumList, positions, inversions);
+            System.out.println(inv);
         } else if (sortingAlgorithm.equalsIgnoreCase("quick")) {
             quickSortWithPositions(sumList, positions, 0, sumList.size()-1);
         } else {
