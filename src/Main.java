@@ -17,7 +17,6 @@ public class Main {
                 "assets/source5.txt"
         );
         List<Integer> sums = nsh.sumValuesByIndex(fileNames);
-        System.out.println(sums);
         nsh.sortAllFilesWithPositions("merge", sums);
         nsh.sortAllFilesWithPositions("quick", sums);
         nsh.sortAllFilesWithPositions("insertion", sums);

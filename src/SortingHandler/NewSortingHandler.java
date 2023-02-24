@@ -30,7 +30,7 @@ public class NewSortingHandler {
             }
         }
         List<Integer> result = new ArrayList<>();
-        int maxLength = lists.stream().mapToInt(List::size).max().orElse(0);
+        int maxLength = lists.stream().mapToInt(List::size).max().orElse(0); // max length of list
         for (int i = 0; i < maxLength; i++) {
             int sum = 0;
             for (List<Integer> list : lists) {
@@ -40,7 +40,7 @@ public class NewSortingHandler {
             }
             result.add(sum);
         }
-        return result;
+        return result; // returns list 6, summation of elements in the other 5 txt files by index
     }
 
     public int mergeSortWithPositions(List<Integer> list, List<Integer> positions, List<Integer> inversions) {
@@ -58,26 +58,28 @@ public class NewSortingHandler {
         int i = 0, j = 0, k = 0;
         int inversionsCount = leftInversions + rightInversions;
         while (i < left.size() && j < right.size()) {
-            if (left.get(i) <= right.get(j)) {
-                list.set(k, left.get(i));
-                positions.set(k, leftPositions.get(i));
+            if (left.get(i) <= right.get(j)) { // compare left element
+                list.set(k, left.get(i)); // update position
+                positions.set(k, leftPositions.get(i)); // update position
                 i++;
             } else {
-                list.set(k, right.get(j));
-                positions.set(k, rightPositions.get(j));
+                list.set(k, right.get(j)); // compare right element
+                positions.set(k, rightPositions.get(j)); // update position
                 j++;
-                int invCount = mid - i;
-                inversionsCount += invCount;
-                inversions.set(k, inversions.get(k) + invCount);
+                int invCount = mid - i; // track inversions
+                inversionsCount += invCount; // summation of inversions
+                inversions.set(k, inversions.get(k) + invCount); // store for updating
             }
             k++;
         }
+        // Check left side
         while (i < left.size()) {
             list.set(k, left.get(i));
             positions.set(k, leftPositions.get(i));
             i++;
             k++;
         }
+        // Check right side
         while (j < right.size()) {
             list.set(k, right.get(j));
             positions.set(k, rightPositions.get(j));
@@ -155,6 +157,7 @@ public class NewSortingHandler {
         }
         int inv = 0;
         List<Integer> inversions = new ArrayList<>(Collections.nCopies(sumList.size(), 0));
+        // Determine which algorithm we want to use
         if (sortingAlgorithm.equalsIgnoreCase("merge")) {
             inv = mergeSortWithPositions(sumList, positions, inversions);
         } else if (sortingAlgorithm.equalsIgnoreCase("quick")) {
@@ -183,8 +186,6 @@ public class NewSortingHandler {
         // Save the sorted sum list
         String sumFileName = String.format("%s_Sorted_Sum.txt", sortingAlgorithm);
         this.fh.writeToFile(sumList, sumFileName);
-        // Need: re-sort contents of each newly-sorted file and count inversions
-        // Compare (in report)
     }
 
     public int insertionSortWithInversions(List<Integer> list, List<Integer> inversions) {
@@ -192,17 +193,16 @@ public class NewSortingHandler {
         int count = 0;
 
         for (int i = 1; i < n; i++) {
-            int key = list.get(i);
+            int key = list.get(i); // obtain element
             int j = i - 1;
-
-            while (j >= 0 && list.get(j) > key) {
+            while (j >= 0 && list.get(j) > key) { // Compare elements and handle as needed
                 list.set(j + 1, list.get(j));
                 inversions.set(j + 1, inversions.get(j) + 1); // increment inversion count
-                j--;
+                j--; // decrement j to find correct location of value
                 count++;
             }
 
-            list.set(j + 1, key);
+            list.set(j + 1, key); // input value into correct place
             inversions.set(j + 1, inversions.get(j + 1) + count); // update inversion count
             count = 0;
         }
