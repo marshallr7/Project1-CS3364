@@ -20,6 +20,6 @@ public class Main {
         System.out.println(sums);
         nsh.sortAllFilesWithPositions("merge", sums);
         nsh.sortAllFilesWithPositions("quick", sums);
-
+        nsh.sortAllFilesWithPositions("insertion", sums);
     }
 }

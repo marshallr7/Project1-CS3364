@@ -153,14 +153,19 @@ public class NewSortingHandler {
         for (int i = 0; i < sumList.size(); i++) {
             positions.add(i);
         }
+        int inv = 0;
+        List<Integer> inversions = new ArrayList<>(Collections.nCopies(sumList.size(), 0));
         if (sortingAlgorithm.equalsIgnoreCase("merge")) {
-            List<Integer> inversions = new ArrayList<>(Collections.nCopies(sumList.size(), 0));
-            int inv = mergeSortWithPositions(sumList, positions, inversions);
-            System.out.println(inv);
+            inv = mergeSortWithPositions(sumList, positions, inversions);
         } else if (sortingAlgorithm.equalsIgnoreCase("quick")) {
             quickSortWithPositions(sumList, positions, 0, sumList.size()-1);
+        } else if (sortingAlgorithm.equalsIgnoreCase("insertion")) {
+            inv = insertionSortWithInversions(sumList, inversions);
         } else {
             throw new IllegalArgumentException("Unsupported sorting algorithm: " + sortingAlgorithm);
+        }
+        if (inv > 0) {
+            System.out.println(inv);
         }
         // Apply the same movements to the other five lists
         for (int i = 0; i < lists.size(); i++) {
@@ -182,5 +187,27 @@ public class NewSortingHandler {
         // Compare (in report)
     }
 
+    public int insertionSortWithInversions(List<Integer> list, List<Integer> inversions) {
+        int n = list.size();
+        int count = 0;
+
+        for (int i = 1; i < n; i++) {
+            int key = list.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && list.get(j) > key) {
+                list.set(j + 1, list.get(j));
+                inversions.set(j + 1, inversions.get(j) + 1); // increment inversion count
+                j--;
+                count++;
+            }
+
+            list.set(j + 1, key);
+            inversions.set(j + 1, inversions.get(j + 1) + count); // update inversion count
+            count = 0;
+        }
+
+        return inversions.stream().reduce(0, Integer::sum);
+    }
 
 }
